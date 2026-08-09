@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #FAF9F6;
+    color: #1A1A1A;
+  }
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Syne', sans-serif;
+  }
+  .font-mono-code {
+    font-family: 'Space Grotesk', monospace;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for horizontal card scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.artistic-border {
+  border: 1px solid rgba(26, 26, 26, 0.12);
+}
+
+.artistic-shadow {
+  box-shadow: 8px 8px 0px 0px #1A1A1A;
+}
+
+.artistic-accent-bar {
+  width: 80px;
+  height: 4px;
+  background-color: #D13111;
+}

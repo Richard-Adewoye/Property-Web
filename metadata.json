@@ -1,0 +1,6 @@
+{
+  "name": "ProtAh. - Real Estate & Property Platform",
+  "description": "Real estate and property platform landing page featuring interactive property search, property showcases, client testimonials, and newsletter subscription.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
