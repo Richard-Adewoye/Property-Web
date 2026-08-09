@@ -13,15 +13,20 @@ import AuthModal from './components/AuthModal.jsx';
 import { PROPERTIES } from './data/properties.js';
 
 export default function App() {
-  const [activeCategory, setActiveCategory] = useState('house');
+  const [activeCategory, setActiveCategory] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedType, setSelectedType] = useState('');
+  const [selectedListingType, setSelectedListingType] = useState('all'); // 'all' | 'rent' | 'buy' | 'sell'
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [authModalMode, setAuthModalMode] = useState(null); // 'login' | 'join' | null
 
   // Filter properties based on search selection
   const filteredProperties = useMemo(() => {
     return PROPERTIES.filter((prop) => {
+      // Listing type filter (Rent, Buy, Sell)
+      if (selectedListingType && selectedListingType !== 'all' && prop.listingType !== selectedListingType) {
+        return false;
+      }
       // Category filter
       if (activeCategory && prop.category !== activeCategory) {
         return false;
@@ -36,7 +41,7 @@ export default function App() {
       }
       return true;
     });
-  }, [activeCategory, selectedCity, selectedType]);
+  }, [activeCategory, selectedCity, selectedType, selectedListingType]);
 
   const handleSearch = () => {
     const el = document.getElementById('properties');
@@ -46,9 +51,10 @@ export default function App() {
   };
 
   const handleResetFilters = () => {
-    setActiveCategory('house');
+    setActiveCategory('');
     setSelectedCity('');
     setSelectedType('');
+    setSelectedListingType('all');
   };
 
   return (
@@ -95,6 +101,8 @@ export default function App() {
           activeCategory={activeCategory}
           selectedCity={selectedCity}
           selectedType={selectedType}
+          selectedListingType={selectedListingType}
+          setSelectedListingType={setSelectedListingType}
           onResetFilters={handleResetFilters}
         />
 

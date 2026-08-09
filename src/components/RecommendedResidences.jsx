@@ -1,8 +1,17 @@
 import { useState } from 'react';
-import { ArrowRight, Bed, Bath, Maximize2, MapPin, Heart, Sparkles, FilterX } from 'lucide-react';
+import { ArrowRight, Bed, Bath, Maximize2, MapPin, Heart, Sparkles, FilterX, KeyRound, Tag, Building2, Landmark } from 'lucide-react';
 import { PROPERTIES } from '../data/properties.js';
 
-export default function RecommendedResidences({ properties = PROPERTIES, onSelectProperty, activeCategory, selectedCity, selectedType, onResetFilters }) {
+export default function RecommendedResidences({ 
+  properties = PROPERTIES, 
+  onSelectProperty, 
+  activeCategory, 
+  selectedCity, 
+  selectedType, 
+  selectedListingType = 'all', 
+  setSelectedListingType, 
+  onResetFilters 
+}) {
   const [favorites, setFavorites] = useState([]);
 
   const toggleFavorite = (e, id) => {
@@ -12,13 +21,46 @@ export default function RecommendedResidences({ properties = PROPERTIES, onSelec
     );
   };
 
-  const hasActiveFilters = Boolean(activeCategory !== 'house' || selectedCity || selectedType);
+  const hasActiveFilters = Boolean(
+    (activeCategory && activeCategory !== 'all') || 
+    selectedCity || 
+    selectedType || 
+    selectedListingType !== 'all'
+  );
+
+  // Category counts based on overall PROPERTIES dataset
+  const counts = {
+    all: PROPERTIES.length,
+    rent: PROPERTIES.filter(p => p.listingType === 'rent').length,
+    buy: PROPERTIES.filter(p => p.listingType === 'buy').length,
+    sell: PROPERTIES.filter(p => p.listingType === 'sell').length,
+  };
+
+  const filterTabs = [
+    { id: 'all', label: 'All Listings', icon: Building2, count: counts.all },
+    { id: 'rent', label: 'For Rent', icon: KeyRound, count: counts.rent },
+    { id: 'buy', label: 'For Buy', icon: Tag, count: counts.buy },
+    { id: 'sell', label: 'For Sale', icon: Landmark, count: counts.sell },
+  ];
+
+  const getListingBadgeStyle = (listingType) => {
+    switch (listingType) {
+      case 'rent':
+        return 'bg-[#D13111] text-white border-white/20';
+      case 'buy':
+        return 'bg-[#1A1A1A] text-white border-white/20';
+      case 'sell':
+        return 'bg-[#2E5A44] text-white border-white/20';
+      default:
+        return 'bg-[#1A1A1A] text-white border-white/20';
+    }
+  };
 
   return (
     <section id="properties" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
         <div className="max-w-xl space-y-3">
           <div className="w-20 h-1 bg-[#D13111]"></div>
           <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#D13111]">
@@ -36,7 +78,7 @@ export default function RecommendedResidences({ properties = PROPERTIES, onSelec
           {hasActiveFilters && (
             <button
               onClick={onResetFilters}
-              className="px-4 py-2.5 bg-white border-2 border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-4 py-2.5 bg-white border-2 border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white text-xs font-bold uppercase tracking-widest flex items-center gap-1.5 transition-colors cursor-pointer shadow-[3px_3px_0px_0px_#1A1A1A]"
             >
               <FilterX className="w-3.5 h-3.5" />
               Reset Filters
@@ -45,11 +87,44 @@ export default function RecommendedResidences({ properties = PROPERTIES, onSelec
 
           <a 
             href="#properties"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#1A1A1A] hover:bg-[#D13111] text-white font-bold text-xs uppercase tracking-widest transition-colors cursor-pointer border-2 border-[#1A1A1A]"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#1A1A1A] hover:bg-[#D13111] text-white font-bold text-xs uppercase tracking-widest transition-colors cursor-pointer border-2 border-[#1A1A1A] shadow-[4px_4px_0px_0px_#D13111]"
           >
             <span>See More</span>
             <ArrowRight className="w-4 h-4" />
           </a>
+        </div>
+      </div>
+
+      {/* Category Filter Navigation Bar (Rent, Buy, Sell, All) */}
+      <div className="mb-8 p-2 bg-[#FAF9F6] border-2 border-[#1A1A1A] shadow-[6px_6px_0px_0px_#1A1A1A]">
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="px-3 py-2 text-[10px] font-black uppercase tracking-widest text-[#1A1A1A] hidden sm:block border-r border-[#1A1A1A]/20 pr-4 mr-1">
+            Category Filter:
+          </div>
+
+          {filterTabs.map((tab) => {
+            const Icon = tab.icon;
+            const isActive = selectedListingType === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setSelectedListingType && setSelectedListingType(tab.id)}
+                className={`flex-1 sm:flex-none px-4 py-2.5 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer border ${
+                  isActive
+                    ? 'bg-[#D13111] text-white border-[#1A1A1A] shadow-[3px_3px_0px_0px_#1A1A1A]'
+                    : 'bg-white text-[#1A1A1A] border-[#1A1A1A]/30 hover:border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white'
+                }`}
+              >
+                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-[#D13111]'}`} />
+                <span>{tab.label}</span>
+                <span className={`ml-1 text-[10px] px-2 py-0.5 font-mono-code font-black ${
+                  isActive ? 'bg-white text-[#D13111]' : 'bg-[#1A1A1A]/10 text-[#1A1A1A]'
+                }`}>
+                  {tab.count}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -58,7 +133,7 @@ export default function RecommendedResidences({ properties = PROPERTIES, onSelec
         <div className="bg-white p-12 text-center border-2 border-[#1A1A1A] shadow-[6px_6px_0px_0px_#1A1A1A] space-y-3">
           <Sparkles className="w-8 h-8 text-[#D13111] mx-auto" />
           <h3 className="font-heading text-lg font-bold text-[#1A1A1A] uppercase tracking-wider">No properties found</h3>
-          <p className="text-xs text-[#555] font-medium">Try loosening your search filters above.</p>
+          <p className="text-xs text-[#555] font-medium">Try loosening your search or category filters above.</p>
           <button
             onClick={onResetFilters}
             className="mt-2 px-6 py-2.5 bg-[#D13111] text-white text-xs font-bold uppercase tracking-widest cursor-pointer border border-[#1A1A1A]"
@@ -89,13 +164,19 @@ export default function RecommendedResidences({ properties = PROPERTIES, onSelec
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent opacity-80" />
 
                   {/* Top Badges */}
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                    <span className="px-3 py-1 bg-[#1A1A1A] text-white font-bold text-[10px] uppercase tracking-widest border border-white/20">
-                      {prop.type}
-                    </span>
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 gap-2">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className={`px-2.5 py-1 font-bold text-[10px] uppercase tracking-widest border ${getListingBadgeStyle(prop.listingType)}`}>
+                        {prop.listingType === 'rent' ? 'For Rent' : prop.listingType === 'buy' ? 'For Buy' : 'For Sale'}
+                      </span>
+                      <span className="px-2.5 py-1 bg-[#1A1A1A] text-white font-bold text-[10px] uppercase tracking-widest border border-white/20">
+                        {prop.type}
+                      </span>
+                    </div>
+
                     <button
                       onClick={(e) => toggleFavorite(e, prop.id)}
-                      className={`p-2 border border-[#1A1A1A] transition-all cursor-pointer ${
+                      className={`p-2 border border-[#1A1A1A] transition-all cursor-pointer shrink-0 ${
                         isFav 
                           ? 'bg-[#D13111] text-white' 
                           : 'bg-white text-[#1A1A1A] hover:bg-[#D13111] hover:text-white'
