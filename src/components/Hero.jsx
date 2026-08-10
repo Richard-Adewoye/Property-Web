@@ -39,20 +39,20 @@ export default function Hero({ activeCategory, setActiveCategory, selectedCity, 
         </div>
 
         {/* Floating Property Search Box */}
-        <div className="relative z-20 mt-8 sm:mt-12 max-w-2xl mx-auto bg-[#FAF9F6] p-4 text-[#1A1A1A] border-2 border-[#1A1A1A] shadow-[6px_6px_0px_0px_#1A1A1A]">
+        <div className="relative z-20 mt-8 sm:mt-12 max-w-2xl mx-auto bg-[#FAF9F6] p-3 sm:p-4 text-[#1A1A1A] border-2 border-[#1A1A1A] shadow-[6px_6px_0px_0px_#1A1A1A]">
           
           {/* Top Category Tabs */}
-          <div className="flex items-center justify-between sm:justify-start sm:gap-3 border-b-2 border-[#1A1A1A]/10 pb-3 px-1 overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-2 border-b-2 border-[#1A1A1A]/10 pb-3 px-1 overflow-x-auto scrollbar-none flex-nowrap">
             {PROPERTY_TYPES.map((cat) => {
               const isActive = activeCategory === cat.id;
               return (
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
+                  className={`flex items-center gap-1.5 px-3 py-2 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap shrink-0 min-h-[40px] ${
                     isActive
                       ? 'bg-[#1A1A1A] text-white shadow-xs'
-                      : 'text-[#1A1A1A]/60 hover:text-[#1A1A1A] hover:bg-[#1A1A1A]/5'
+                      : 'text-[#1A1A1A]/70 hover:text-[#1A1A1A] hover:bg-[#1A1A1A]/5'
                   }`}
                 >
                   <span className="text-sm">{cat.icon}</span>
@@ -63,10 +63,10 @@ export default function Hero({ activeCategory, setActiveCategory, selectedCity, 
           </div>
 
           {/* Form Filter Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-3 items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-3 items-stretch">
             
             {/* City Field */}
-            <div className="sm:col-span-5 relative text-left bg-white p-2.5 border-2 border-[#1A1A1A]/15 hover:border-[#1A1A1A] transition-colors">
+            <div className="sm:col-span-5 relative text-left bg-white p-2.5 border-2 border-[#1A1A1A]/15 hover:border-[#1A1A1A] transition-colors flex flex-col justify-center min-h-[52px]">
               <label className="block text-[9px] uppercase tracking-widest text-[#1A1A1A]/60 font-extrabold mb-0.5 px-1">
                 City / Location
               </label>
@@ -83,13 +83,13 @@ export default function Hero({ activeCategory, setActiveCategory, selectedCity, 
               </button>
 
               {cityDropdownOpen && (
-                <div className="absolute left-0 right-0 top-full mt-1 bg-[#FAF9F6] border-2 border-[#1A1A1A] shadow-[4px_4px_0px_0px_#1A1A1A] py-1 z-50 animate-in fade-in duration-150">
+                <div className="absolute left-0 right-0 top-full mt-1 bg-[#FAF9F6] border-2 border-[#1A1A1A] shadow-[4px_4px_0px_0px_#1A1A1A] py-1 z-50 animate-in fade-in duration-150 max-h-56 overflow-y-auto">
                   <button
                     onClick={() => {
                       setSelectedCity('');
                       setCityDropdownOpen(false);
                     }}
-                    className="w-full text-left px-3 py-2 text-xs font-bold uppercase tracking-wider text-[#1A1A1A]/60 hover:bg-[#D13111] hover:text-white"
+                    className="w-full text-left px-3 py-2.5 text-xs font-bold uppercase tracking-wider text-[#1A1A1A]/60 hover:bg-[#D13111] hover:text-white"
                   >
                     All Cities
                   </button>
@@ -100,7 +100,7 @@ export default function Hero({ activeCategory, setActiveCategory, selectedCity, 
                         setSelectedCity(city);
                         setCityDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-xs font-bold uppercase tracking-wider transition-colors ${
+                      className={`w-full text-left px-3 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors ${
                         selectedCity === city ? 'bg-[#D13111] text-white' : 'text-[#1A1A1A] hover:bg-[#1A1A1A]/5'
                       }`}
                     >
@@ -112,7 +112,7 @@ export default function Hero({ activeCategory, setActiveCategory, selectedCity, 
             </div>
 
             {/* Type Field */}
-            <div className="sm:col-span-5 relative text-left bg-white p-2.5 border-2 border-[#1A1A1A]/15 hover:border-[#1A1A1A] transition-colors">
+            <div className="sm:col-span-5 relative text-left bg-white p-2.5 border-2 border-[#1A1A1A]/15 hover:border-[#1A1A1A] transition-colors flex flex-col justify-center min-h-[52px]">
               <label className="block text-[9px] uppercase tracking-widest text-[#1A1A1A]/60 font-extrabold mb-0.5 px-1">
                 Architecture Type
               </label>
@@ -129,13 +129,13 @@ export default function Hero({ activeCategory, setActiveCategory, selectedCity, 
               </button>
 
               {typeDropdownOpen && (
-                <div className="absolute left-0 right-0 top-full mt-1 bg-[#FAF9F6] border-2 border-[#1A1A1A] shadow-[4px_4px_0px_0px_#1A1A1A] py-1 z-50 animate-in fade-in duration-150">
+                <div className="absolute left-0 right-0 top-full mt-1 bg-[#FAF9F6] border-2 border-[#1A1A1A] shadow-[4px_4px_0px_0px_#1A1A1A] py-1 z-50 animate-in fade-in duration-150 max-h-56 overflow-y-auto">
                   <button
                     onClick={() => {
                       setSelectedType('');
                       setTypeDropdownOpen(false);
                     }}
-                    className="w-full text-left px-3 py-2 text-xs font-bold uppercase tracking-wider text-[#1A1A1A]/60 hover:bg-[#D13111] hover:text-white"
+                    className="w-full text-left px-3 py-2.5 text-xs font-bold uppercase tracking-wider text-[#1A1A1A]/60 hover:bg-[#D13111] hover:text-white"
                   >
                     All Types
                   </button>
@@ -146,7 +146,7 @@ export default function Hero({ activeCategory, setActiveCategory, selectedCity, 
                         setSelectedType(type);
                         setTypeDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-xs font-bold uppercase tracking-wider transition-colors ${
+                      className={`w-full text-left px-3 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors ${
                         selectedType === type ? 'bg-[#D13111] text-white' : 'text-[#1A1A1A] hover:bg-[#1A1A1A]/5'
                       }`}
                     >
@@ -161,7 +161,7 @@ export default function Hero({ activeCategory, setActiveCategory, selectedCity, 
             <div className="sm:col-span-2">
               <button
                 onClick={onSearch}
-                className="w-full h-full py-3 px-4 bg-[#D13111] hover:bg-[#B0280D] text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-1.5 transition-all active:scale-95 border-2 border-[#1A1A1A] cursor-pointer"
+                className="w-full h-full min-h-[48px] py-3 px-4 bg-[#D13111] hover:bg-[#B0280D] text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-1.5 transition-all active:scale-95 border-2 border-[#1A1A1A] cursor-pointer"
               >
                 <Search className="w-4 h-4" />
                 <span>Search</span>
@@ -173,20 +173,20 @@ export default function Hero({ activeCategory, setActiveCategory, selectedCity, 
         </div>
 
         {/* Architectural Graphics Accents */}
-        <div className="absolute bottom-0 left-0 w-32 sm:w-52 opacity-80 pointer-events-none border-t-2 border-r-2 border-[#1A1A1A] overflow-hidden">
+        <div className="absolute bottom-0 left-0 w-24 sm:w-52 opacity-50 sm:opacity-80 pointer-events-none border-t-2 border-r-2 border-[#1A1A1A] overflow-hidden">
           <img 
             src="/src/assets/images/hero_architecture_1786311046789.jpg" 
             alt="Modern Minimalist Building"
-            className="w-full h-28 sm:h-36 object-cover grayscale contrast-125 object-bottom"
+            className="w-full h-20 sm:h-36 object-cover grayscale contrast-125 object-bottom"
             referrerPolicy="no-referrer"
           />
         </div>
 
-        <div className="absolute bottom-0 right-0 w-32 sm:w-52 opacity-80 pointer-events-none border-t-2 border-l-2 border-[#1A1A1A] overflow-hidden">
+        <div className="absolute bottom-0 right-0 w-24 sm:w-52 opacity-50 sm:opacity-80 pointer-events-none border-t-2 border-l-2 border-[#1A1A1A] overflow-hidden">
           <img 
             src="/src/assets/images/feature_building_1786311061433.jpg" 
             alt="Modern Highrise Building"
-            className="w-full h-28 sm:h-36 object-cover grayscale contrast-125 object-bottom"
+            className="w-full h-20 sm:h-36 object-cover grayscale contrast-125 object-bottom"
             referrerPolicy="no-referrer"
           />
         </div>

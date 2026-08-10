@@ -39,9 +39,9 @@ export default function Footer() {
             </p>
 
             {/* Quick Contact Links */}
-            <div className="space-y-3 pt-2 text-xs text-white/90 font-bold uppercase tracking-wider">
-              <div className="flex items-center gap-3 bg-white/5 p-3 border border-white/15 w-fit">
-                <div className="p-2 bg-[#D13111] text-white">
+            <div className="space-y-3 pt-2 text-xs text-white/90 font-bold uppercase tracking-wider flex flex-col sm:flex-row sm:flex-wrap gap-3">
+              <div className="flex items-center gap-3 bg-white/5 p-3 border border-white/15 w-full sm:w-auto">
+                <div className="p-2 bg-[#D13111] text-white shrink-0">
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
@@ -50,8 +50,8 @@ export default function Footer() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 bg-white/5 p-3 border border-white/15 w-fit">
-                <div className="p-2 bg-[#D13111] text-white">
+              <div className="flex items-center gap-3 bg-white/5 p-3 border border-white/15 w-full sm:w-auto">
+                <div className="p-2 bg-[#D13111] text-white shrink-0">
                   <Mail className="w-4 h-4" />
                 </div>
                 <div>
@@ -64,7 +64,7 @@ export default function Footer() {
           </div>
 
           {/* Right Column: Newsletter Subscription Box */}
-          <div className="lg:col-span-6 bg-white/5 p-6 sm:p-8 border-2 border-white/15 flex flex-col justify-between">
+          <div className="lg:col-span-6 bg-white/5 p-5 sm:p-8 border-2 border-white/15 flex flex-col justify-between">
             <div>
               <div className="w-12 h-1 bg-[#D13111] mb-2"></div>
               <h3 className="font-heading text-xl font-black uppercase tracking-tight mb-2 text-white">
@@ -76,18 +76,18 @@ export default function Footer() {
             </div>
 
             <form onSubmit={handleSubscribe} className="space-y-3">
-              <div className="relative flex items-center">
+              <div className="flex flex-col sm:flex-row items-stretch gap-2 relative">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   required
-                  className="w-full bg-white/10 text-white placeholder-white/40 text-xs font-bold uppercase tracking-wider pl-4 pr-32 py-3.5 border border-white/20 focus:outline-none focus:border-[#D13111] transition-all"
+                  className="w-full bg-white/10 text-white placeholder-white/40 text-xs font-bold uppercase tracking-wider px-4 py-3.5 border border-white/20 focus:outline-none focus:border-[#D13111] transition-all min-h-[44px]"
                 />
                 <button
                   type="submit"
-                  className="absolute right-1 px-5 py-2.5 bg-[#D13111] hover:bg-[#B0280D] text-white font-bold text-xs uppercase tracking-widest transition-all cursor-pointer border border-[#1A1A1A] flex items-center gap-1"
+                  className="sm:absolute sm:right-1 sm:top-1 sm:bottom-1 px-5 py-3 sm:py-0 bg-[#D13111] hover:bg-[#B0280D] text-white font-bold text-xs uppercase tracking-widest transition-all cursor-pointer border border-[#1A1A1A] flex items-center justify-center gap-1 min-h-[44px]"
                 >
                   {subscribed ? (
                     <>

@@ -62,54 +62,54 @@ export default function PropertyModal({ property, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Bar */}
-        <div className="bg-[#1A1A1A] text-white px-5 py-4 border-b-2 border-[#1A1A1A] flex items-center justify-between gap-4 shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="w-2 h-7 bg-[#D13111]"></div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 bg-[#D13111] text-white font-bold text-[9px] uppercase tracking-widest border border-white/20">
+        <div className="bg-[#1A1A1A] text-white px-3 sm:px-5 py-3 sm:py-4 border-b-2 border-[#1A1A1A] flex items-center justify-between gap-2 sm:gap-4 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="w-1.5 h-6 sm:h-7 bg-[#D13111] shrink-0"></div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="px-1.5 py-0.5 bg-[#D13111] text-white font-bold text-[8px] sm:text-[9px] uppercase tracking-widest border border-white/20 shrink-0">
                   {property.listingType === 'rent' ? 'For Rent' : property.listingType === 'buy' ? 'For Buy' : 'For Sale'}
                 </span>
-                <span className="text-white/60 text-[10px] font-mono-code uppercase">{property.city}</span>
+                <span className="text-white/60 text-[9px] sm:text-[10px] font-mono-code uppercase truncate">{property.city}</span>
               </div>
-              <h2 className="font-heading text-lg sm:text-xl font-black uppercase tracking-tight text-white line-clamp-1">
+              <h2 className="font-heading text-sm sm:text-xl font-black uppercase tracking-tight text-white truncate">
                 {property.name}
               </h2>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="font-mono-code font-black text-lg sm:text-xl text-[#D13111] bg-white px-3 py-1 border border-white/20 hidden sm:inline-block">
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="font-mono-code font-black text-xs sm:text-xl text-[#D13111] bg-white px-2 sm:px-3 py-1 border border-white/20">
               {property.price}
             </span>
             <button
               onClick={onClose}
-              className="p-2.5 bg-white text-[#1A1A1A] hover:bg-[#D13111] hover:text-white transition-colors cursor-pointer border border-[#1A1A1A]"
+              className="p-2 sm:p-2.5 bg-white text-[#1A1A1A] hover:bg-[#D13111] hover:text-white transition-colors cursor-pointer border border-[#1A1A1A] shrink-0"
               aria-label="Close modal"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
         </div>
 
         {/* Navigation Tabs Header */}
-        <div className="bg-white border-b-2 border-[#1A1A1A] px-4 py-2 flex items-center justify-between overflow-x-auto shrink-0 gap-2 scrollbar-none">
+        <div className="bg-white border-b-2 border-[#1A1A1A] px-3 sm:px-4 py-2 flex items-center justify-between overflow-x-auto shrink-0 gap-2 scrollbar-none">
           <div className="flex items-center gap-1.5 min-w-max">
             <button
               onClick={() => setActiveTab('gallery')}
-              className={`px-3.5 py-2 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 border transition-all cursor-pointer ${
+              className={`px-3 py-2 min-h-[42px] text-[11px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 border transition-all cursor-pointer ${
                 activeTab === 'gallery'
                   ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-[2px_2px_0px_0px_#D13111]'
                   : 'bg-[#FAF9F6] text-[#1A1A1A] border-[#1A1A1A]/20 hover:border-[#1A1A1A]'
               }`}
             >
               <ImageIcon className="w-3.5 h-3.5 text-[#D13111]" />
-              <span>High-Res Gallery ({galleryList.length})</span>
+              <span>Gallery ({galleryList.length})</span>
             </button>
 
             <button
               onClick={() => setActiveTab('map')}
-              className={`px-3.5 py-2 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 border transition-all cursor-pointer ${
+              className={`px-3 py-2 min-h-[42px] text-[11px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 border transition-all cursor-pointer ${
                 activeTab === 'map'
                   ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-[2px_2px_0px_0px_#D13111]'
                   : 'bg-[#FAF9F6] text-[#1A1A1A] border-[#1A1A1A]/20 hover:border-[#1A1A1A]'
@@ -121,19 +121,19 @@ export default function PropertyModal({ property, onClose }) {
 
             <button
               onClick={() => setActiveTab('specs')}
-              className={`px-3.5 py-2 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 border transition-all cursor-pointer ${
+              className={`px-3 py-2 min-h-[42px] text-[11px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 border transition-all cursor-pointer ${
                 activeTab === 'specs'
                   ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-[2px_2px_0px_0px_#D13111]'
                   : 'bg-[#FAF9F6] text-[#1A1A1A] border-[#1A1A1A]/20 hover:border-[#1A1A1A]'
               }`}
             >
               <Layers className="w-3.5 h-3.5 text-[#D13111]" />
-              <span>Architectural Specs</span>
+              <span>Specs</span>
             </button>
 
             <button
               onClick={() => setActiveTab('tour')}
-              className={`px-3.5 py-2 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 border transition-all cursor-pointer ${
+              className={`px-3 py-2 min-h-[42px] text-[11px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 border transition-all cursor-pointer ${
                 activeTab === 'tour'
                   ? 'bg-[#D13111] text-white border-[#1A1A1A] shadow-[2px_2px_0px_0px_#1A1A1A]'
                   : 'bg-[#FAF9F6] text-[#1A1A1A] border-[#1A1A1A]/20 hover:border-[#1A1A1A]'
@@ -144,7 +144,7 @@ export default function PropertyModal({ property, onClose }) {
             </button>
           </div>
 
-          <div className="hidden md:flex items-center gap-2 text-xs font-mono-code text-[#1A1A1A]/70">
+          <div className="hidden lg:flex items-center gap-2 text-xs font-mono-code text-[#1A1A1A]/70">
             <MapPin className="w-3.5 h-3.5 text-[#D13111]" />
             <span className="truncate max-w-[200px]">{property.location}</span>
           </div>

@@ -97,7 +97,7 @@ export default function RecommendedResidences({
 
       {/* Category Filter Navigation Bar (Rent, Buy, Sell, All) */}
       <div className="mb-8 p-2 bg-[#FAF9F6] border-2 border-[#1A1A1A] shadow-[6px_6px_0px_0px_#1A1A1A]">
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex items-center gap-2 overflow-x-auto scrollbar-none sm:flex-wrap">
           <div className="px-3 py-2 text-[10px] font-black uppercase tracking-widest text-[#1A1A1A] hidden sm:block border-r border-[#1A1A1A]/20 pr-4 mr-1">
             Category Filter:
           </div>
@@ -109,14 +109,14 @@ export default function RecommendedResidences({
               <button
                 key={tab.id}
                 onClick={() => setSelectedListingType && setSelectedListingType(tab.id)}
-                className={`flex-1 sm:flex-none px-4 py-2.5 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer border ${
+                className={`shrink-0 sm:shrink sm:flex-1 min-h-[44px] px-4 py-2.5 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer border ${
                   isActive
                     ? 'bg-[#D13111] text-white border-[#1A1A1A] shadow-[3px_3px_0px_0px_#1A1A1A]'
                     : 'bg-white text-[#1A1A1A] border-[#1A1A1A]/30 hover:border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white'
                 }`}
               >
                 <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-[#D13111]'}`} />
-                <span>{tab.label}</span>
+                <span className="whitespace-nowrap">{tab.label}</span>
                 <span className={`ml-1 text-[10px] px-2 py-0.5 font-mono-code font-black ${
                   isActive ? 'bg-white text-[#D13111]' : 'bg-[#1A1A1A]/10 text-[#1A1A1A]'
                 }`}>
