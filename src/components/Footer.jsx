@@ -16,7 +16,7 @@ export default function Footer() {
   };
 
   return (
-    <footer id="footer" className="pt-8 pb-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <footer id="footer" className="w-full pt-8 pb-6 px-4 sm:px-6 lg:px-8">
       {/* Main Ocean Blue Rounded Card Box transformed into Charcoal & Terracotta Monolith */}
       <div className="bg-[#1A1A1A] text-white p-8 sm:p-12 md:p-16 relative overflow-hidden border-2 border-[#1A1A1A] shadow-[8px_8px_0px_0px_#D13111]">
         
